@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Vendor</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+
+        .vendor-card {
+            border-radius: 20px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border: none;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            color: white;
+            transition: 0.4s ease;
+        }
+
+        .vendor-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, #ff9966, #ff5e62);
+            border-radius: 20px 20px 0 0 !important;
+            color: white;
+        }
+
+        label {
+            font-weight: 600;
+            color: #f8f9fa;
+        }
+
+        .form-control {
+            border-radius: 25px;
+            padding: 10px 18px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+            transform: scale(1.02);
+        }
+
+        textarea.form-control {
+            border-radius: 20px;
+        }
+
+        .btn-update {
+            background: linear-gradient(90deg, #1cc88a, #36b9cc);
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            padding: 8px 25px;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .btn-update:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-back {
+            border-radius: 25px;
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card vendor-card shadow-lg">
+
+                <div class="card-header text-center p-3">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil-square icon"></i>
+                        Edit Vendor
+                    </h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label>Vendor Name</label>
+                            <input type="text" name="name"
+                                   class="form-control"
+                                   value="{{ vendor.name }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" name="email"
+                                   class="form-control"
+                                   value="{{ vendor.email }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Phone</label>
+                            <input type="text" name="phone"
+                                   class="form-control"
+                                   value="{{ vendor.phone }}" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label>Address</label>
+                            <textarea name="address" rows="3"
+                                      class="form-control"
+                                      required>{{ vendor.address }}</textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'vendor_list' %}" 
+                               class="btn btn-secondary btn-back px-4">
+                                Back
+                            </a>
+
+                            <button type="submit" 
+                                    class="btn btn-update">
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
